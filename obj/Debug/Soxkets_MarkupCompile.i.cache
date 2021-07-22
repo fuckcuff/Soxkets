@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\demented\Desktop\C#Programs\ServerHoster\obj\Debug\
+C:\Users\demented\Desktop\C#Programs\Soxkets\obj\Debug\
 Soxkets
 none
 false
 DEBUG;TRACE
-C:\Users\demented\Desktop\C#Programs\ServerHoster\App.xaml
+C:\Users\demented\Desktop\C#Programs\Soxkets\App.xaml
 3608167701
 
 8-257443225
 15-1804167217
 ClientPage.xaml;MainWindow.xaml;ServerPage.xaml;
 
-True
+False
 

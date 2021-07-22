@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Soxkets"
         mc:Ignorable="d"
-        Title="Soxkets" Height="200" Width="375" MinWidth="375" MinHeight="150" MaxWidth="1920" MaxHeight="1040" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStyle="None" Icon="C:\Users\demented\Desktop\C#Programs\Soxkets\icon4.ico" ResizeMode="CanResizeWithGrip" AllowsTransparency="True">
+        Title="Soxkets" Height="200" Width="375" MinWidth="375" MinHeight="150" MaxWidth="1920" MaxHeight="1040" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStyle="None" Icon="C:\Users\demented\Desktop\C#Programs\Soxkets\res\icon4.ico" ResizeMode="CanResizeWithGrip" AllowsTransparency="True">
     <Grid MinWidth="200" Background="#FF323232">
         <Frame Name="Main" NavigationUIVisibility="Hidden"></Frame>
 
@@ -13,16 +13,16 @@
         <Rectangle HorizontalAlignment="Center" VerticalAlignment="Top" Width="2000" Height="50" Fill="#FF252525" MouseDown="Rectangle_MouseDown"/>
         <Border BorderThickness="2" BorderBrush="#FF191919"/>
         <Rectangle MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="11.5" Fill="Transparent"/>
-        <Image ToolTip="Close" MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseButton" MouseUp="CloseButton_MouseUp" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\close.png" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12.5"></Image>
+        <Image ToolTip="Close" MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseButton" MouseUp="CloseButton_MouseUp" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\res\close.png" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12.5"></Image>
 
         <Rectangle MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,11.5,41.5,0" Fill="Transparent"/>
-        <Image ToolTip="Maximize" MouseUp="MaximizeButton_MouseUp" MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeButton" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\maximize.png" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12.5,42,0"></Image>
+        <Image ToolTip="Maximize" MouseUp="MaximizeButton_MouseUp" MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeButton" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\res\maximize.png" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12.5,42,0"></Image>
 
         <Rectangle MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,11.5,70.5,0" Fill="Transparent"/>
-        <Image ToolTip="Minimize" MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeButton" MouseUp="MinimizeButton_MouseUp" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\minimize.png" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12.5,71,0"></Image>
+        <Image ToolTip="Minimize" MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeButton" MouseUp="MinimizeButton_MouseUp" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\res\minimize.png" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12.5,71,0"></Image>
 
         <!-- Soxkets logo -->
-        <Image Name="InterfaceToggle" ToolTip="Switches between the server and client interface" Width="25" Height="25" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\icon_25x.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12.5" Stretch="Fill" MouseUp="InterfaceToggle_MouseUp"/>
+        <Image Name="InterfaceToggle" ToolTip="Switches between the server and client interface" Width="25" Height="25" Source="C:\Users\demented\Desktop\C#Programs\Soxkets\res\icon_25x.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12.5" Stretch="Fill" MouseUp="InterfaceToggle_MouseUp"/>
         <TextBlock MouseDown="Rectangle_MouseDown" HorizontalAlignment="Center" Height="52" TextWrapping="Wrap" Text="SOXKETS" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Foreground="White" Grid.Column="1" TextAlignment="Center" />
     </Grid>
 </Window>
