@@ -17,7 +17,7 @@ using System.Net.Sockets;
 using AsyncClientLib;
 using System.Windows.Media.Effects;
 
-namespace ServerHoster
+namespace Soxkets
 {
     /// <summary>
     /// Interaction logic for ClientPage.xaml

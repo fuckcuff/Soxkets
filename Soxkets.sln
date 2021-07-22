@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerHoster", "ServerHoster.csproj", "{CE978CA0-085D-4FA2-933F-1CD081BD2464}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soxkets", "Soxkets.csproj", "{CE978CA0-085D-4FA2-933F-1CD081BD2464}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncServerLib", "..\AsyncServerLib\AsyncServerLib.csproj", "{E6900D7A-095A-44BE-B0B6-0E5CD9897B2C}"
 EndProject

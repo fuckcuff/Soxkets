@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServerHoster.Properties {
+namespace Soxkets.Properties {
     using System;
     
     

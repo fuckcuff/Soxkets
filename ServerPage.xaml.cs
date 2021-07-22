@@ -18,7 +18,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
 
-namespace ServerHoster
+namespace Soxkets
 {
     /// <summary>
     /// Server interface
@@ -49,7 +49,7 @@ namespace ServerHoster
                     server.StartListening(ip, port);
                     StartButton.ToolTip = "Stops accepting connections and drops all existing ones";
                     StartButton.Content = "STOP";
-                    //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\ServerHoster\iconactivated_25x.png"));
+                    //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\Soxkets\iconactivated_25x.png"));
                     startButtonIsOn = true;
 
                     /*
@@ -81,7 +81,7 @@ namespace ServerHoster
 
                     StartButton.ToolTip = "Starts accepting connections on the specified IP and port";
                     StartButton.Content = "START";
-                    //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\ServerHoster\icon_25x.png"));
+                    //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\Soxkets\icon_25x.png"));
                     startButtonIsOn = false;
                 }
             }
@@ -90,7 +90,7 @@ namespace ServerHoster
                 server.Stop();
                 StartButton.ToolTip = "Starts accepting connections on the specified IP and port";
                 StartButton.Content = "START";
-                //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\ServerHoster\icon_25x.png"));
+                //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\Soxkets\icon_25x.png"));
                 startButtonIsOn = false;
             }
         }

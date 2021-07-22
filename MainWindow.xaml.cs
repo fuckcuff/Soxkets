@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using AsyncServerLib;
 using AsyncClientLib;
 
-namespace ServerHoster
+namespace Soxkets
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -20,3 +20,5 @@ C:\Users\demented\Desktop\C#Programs\ServerHoster\obj\Debug\ClientPage.g.cs
 C:\Users\demented\Desktop\C#Programs\ServerHoster\obj\Debug\ClientPage.baml
 C:\Users\demented\Desktop\C#Programs\ServerHoster\obj\Debug\ServerPage.g.cs
 C:\Users\demented\Desktop\C#Programs\ServerHoster\obj\Debug\ServerPage.baml
+C:\Users\demented\Desktop\C#Programs\ServerHoster\bin\Debug\AsyncClientLib.dll
+C:\Users\demented\Desktop\C#Programs\ServerHoster\bin\Debug\AsyncClientLib.pdb
