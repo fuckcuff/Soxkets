@@ -17,6 +17,7 @@ using AsyncServerLib;
 using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.IO;
 
 namespace Soxkets
 {
@@ -25,6 +26,8 @@ namespace Soxkets
     /// </summary>
     public partial class ServerPage : Page
     {
+        string servernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/servername.txt";
+
         AsyncServer server = new AsyncServer();
 
         IPAddress ip = null;
@@ -33,10 +36,17 @@ namespace Soxkets
         string serverName;
         public bool startButtonIsOn;
 
+        private bool AutoScroll = true;
+
         public ServerPage()
         {
             InitializeComponent();
             startButtonIsOn = false;
+            if (File.Exists(servernamePath))
+            {
+                serverName = File.ReadAllText(servernamePath);
+                UsernameTextbox.Text = serverName;
+            }
         }
 
         // Start button
@@ -55,8 +65,10 @@ namespace Soxkets
                     /*
                     while (startButtonIsOn)
                     {
+                        // Converts recieved buff to string
                         string receivedMessage = new string(server.recievedBuff, 0, server.recievedBuff.Length);
 
+                        // Prints new message to stack panel
                         TextBlock message = new TextBlock();
                         message.Foreground = Brushes.White;
                         message.TextWrapping = TextWrapping.Wrap;
@@ -73,6 +85,7 @@ namespace Soxkets
                         Messages.Children.Add(message);
                     }
                     */
+                    
                 }
                 catch (Exception excep)
                 {
@@ -279,8 +292,17 @@ namespace Soxkets
             }
             else
             {
-                UsernameTextbox.TextAlignment = TextAlignment.Left;
+                UsernameTextbox.Foreground = Brushes.DarkGray;
+                UsernameTextbox.TextAlignment = TextAlignment.Center;
                 serverName = UsernameTextbox.Text.Trim();
+
+                string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                if (!Directory.Exists(appdataPath + @"/soxkets"))
+                {
+                    Directory.CreateDirectory(appdataPath + @"/soxkets");
+                }
+                File.WriteAllText(servernamePath, serverName);
             }
         }
 
@@ -291,6 +313,36 @@ namespace Soxkets
                 UsernameTextbox.Text = "Username";
                 UsernameTextbox.TextAlignment = TextAlignment.Center;
                 UsernameTextbox.Foreground = Brushes.DarkGray;
+            }
+            else
+            {
+                UsernameTextbox.Foreground = Brushes.White;
+            }
+        }
+
+        // Auto scroll
+        private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            // User scroll event : set or unset auto-scroll mode
+            if (e.ExtentHeightChange == 0)
+            {   // Content unchanged : user scroll event
+                if (_scrollViewer.VerticalOffset == _scrollViewer.ScrollableHeight)
+                {   // Scroll bar is in bottom
+                    // Set auto-scroll mode
+                    AutoScroll = true;
+                }
+                else
+                {   // Scroll bar isn't in bottom
+                    // Unset auto-scroll mode
+                    AutoScroll = false;
+                }
+            }
+
+            // Content scroll event : auto-scroll eventually
+            if (AutoScroll && e.ExtentHeightChange != 0)
+            {   // Content changed and auto-scroll mode set
+                // Autoscroll
+                _scrollViewer.ScrollToVerticalOffset(_scrollViewer.ExtentHeight);
             }
         }
     }

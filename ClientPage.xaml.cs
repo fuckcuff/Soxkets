@@ -16,6 +16,7 @@ using System.Net;
 using System.Net.Sockets;
 using AsyncClientLib;
 using System.Windows.Media.Effects;
+using System.IO;
 
 namespace Soxkets
 {
@@ -24,9 +25,13 @@ namespace Soxkets
     /// </summary>
     public partial class ClientPage : Page
     {
+        string usernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/username.txt";
+
         SolidColorBrush ErrorColor = new SolidColorBrush(Color.FromArgb(255, 255, 80, 80));
 
         AsyncClient server = new AsyncClient();
+
+        private bool AutoScroll = true;
 
         //public bool isConnected;
 
@@ -39,6 +44,11 @@ namespace Soxkets
         {
             InitializeComponent();
             server.IsConnected = false;
+            if (File.Exists(usernamePath))
+            {
+                userName = File.ReadAllText(usernamePath);
+                ClientUsernameTextbox.Text = userName;
+            }
         }
 
         // Connect button
@@ -75,9 +85,9 @@ namespace Soxkets
                             };
 
                             message.Text = receivedMessage.Trim();
-                            if (!(message.Text.Trim() == "") && !(message.Text.Trim() == null) && !string.IsNullOrEmpty(message.Text.Trim()))
+                            if (server.IsConnected)
                             {
-                                Messages.Children.Add(message); // BUG: Prints empty message when server stops, even with checking message.Text
+                                Messages.Children.Add(message);
                             }
                         }
                         LocalDisconnectMessage();
@@ -302,8 +312,17 @@ namespace Soxkets
             }
             else
             {
-                ClientUsernameTextbox.TextAlignment = TextAlignment.Left;
+                ClientUsernameTextbox.Foreground = Brushes.DarkGray;
+                ClientUsernameTextbox.TextAlignment = TextAlignment.Center;
                 userName = ClientUsernameTextbox.Text.Trim();
+
+                string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                
+                if (!Directory.Exists(appdataPath + @"/soxkets"))
+                {
+                    Directory.CreateDirectory(appdataPath + @"/soxkets");
+                }
+                File.WriteAllText(usernamePath, userName);
             }
         }
 
@@ -314,6 +333,10 @@ namespace Soxkets
                 ClientUsernameTextbox.Text = "Username";
                 ClientUsernameTextbox.TextAlignment = TextAlignment.Center;
                 ClientUsernameTextbox.Foreground = Brushes.DarkGray;
+            }
+            else
+            {
+                ClientUsernameTextbox.Foreground = Brushes.White;
             }
         }
 
@@ -333,6 +356,32 @@ namespace Soxkets
                 BlurRadius = 2
             };
             Messages.Children.Add(disconnectMessage);
+        }
+
+        // Auto scroll
+        private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            // User scroll event : set or unset auto-scroll mode
+            if (e.ExtentHeightChange == 0)
+            {   // Content unchanged : user scroll event
+                if (_scrollViewer.VerticalOffset == _scrollViewer.ScrollableHeight)
+                {   // Scroll bar is in bottom
+                    // Set auto-scroll mode
+                    AutoScroll = true;
+                }
+                else
+                {   // Scroll bar isn't in bottom
+                    // Unset auto-scroll mode
+                    AutoScroll = false;
+                }
+            }
+
+            // Content scroll event : auto-scroll eventually
+            if (AutoScroll && e.ExtentHeightChange != 0)
+            {   // Content changed and auto-scroll mode set
+                // Autoscroll
+                _scrollViewer.ScrollToVerticalOffset(_scrollViewer.ExtentHeight);
+            }
         }
     }
 }

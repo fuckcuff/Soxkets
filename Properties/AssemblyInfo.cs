@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ServerHoster")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Soxkets")]
+[assembly: AssemblyDescription("Communications app")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ServerHoster")]
+[assembly: AssemblyCompany("Soxkets")]
+[assembly: AssemblyProduct("Soxkets")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
