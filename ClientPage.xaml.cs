@@ -56,6 +56,33 @@ namespace ServerHoster
                         ConnectButton.Content = "DISCONNECT";
                         ConnectButton.Foreground = Brushes.White;
                         server.IsConnected = true;
+                        while (server.IsConnected)
+                        {
+                            Array.Clear(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length);
+                            await server.ReadMessage();
+                            string receivedMessage = Encoding.ASCII.GetString(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length);
+
+                            TextBlock message = new TextBlock();
+                            message.Foreground = Brushes.White;
+                            message.TextWrapping = TextWrapping.Wrap;
+                            message.Effect = new DropShadowEffect
+                            {
+                                ShadowDepth = 1,
+                                Direction = 330,
+                                Color = Colors.Black,
+                                Opacity = 0.7,
+                                BlurRadius = 2
+                            };
+
+                            message.Text = receivedMessage.Trim();
+                            if (!(message.Text.Trim() == "") && !(message.Text.Trim() == null) && !string.IsNullOrEmpty(message.Text.Trim()))
+                            {
+                                Messages.Children.Add(message); // BUG: Prints empty message when server stops, even with checking message.Text
+                            }
+                        }
+                        LocalDisconnectMessage();
+                        ConnectButton.ToolTip = "Attempts to connect to the specified IP and port";
+                        ConnectButton.Content = "CONNECT";
                     }
                     else
                     {
@@ -74,6 +101,7 @@ namespace ServerHoster
             }
             else
             {
+                LocalDisconnectMessage();
                 server.Disconnect();
                 ConnectButton.ToolTip = "Attempts to connect to the specified IP and port";
                 ConnectButton.Content = "CONNECT";
@@ -97,7 +125,7 @@ namespace ServerHoster
                                 userName = "You";
                             }
                             TextBlock message = new TextBlock();
-                            message.Foreground = Brushes.White;
+                            message.Foreground = Brushes.Gray;
                             message.TextWrapping = TextWrapping.Wrap;
                             message.Effect = new DropShadowEffect
                             {
@@ -147,9 +175,9 @@ namespace ServerHoster
                 {
                     if (Chatbox.Text.Trim() != "")
                     {
-                        System.Diagnostics.Debug.WriteLine("Your message was not sent because the server has not started");
+                        System.Diagnostics.Debug.WriteLine("You are not connected to a server");
                         TextBlock message = new TextBlock();
-                        message.Text = "Your message was not sent because the server has not started";
+                        message.Text = "You are not connected to a server";
                         message.Foreground = ErrorColor;
                         message.TextWrapping = TextWrapping.Wrap;
                         message.Effect = new DropShadowEffect
@@ -287,6 +315,24 @@ namespace ServerHoster
                 ClientUsernameTextbox.TextAlignment = TextAlignment.Center;
                 ClientUsernameTextbox.Foreground = Brushes.DarkGray;
             }
+        }
+
+        // Client side message
+        private void LocalDisconnectMessage()
+        {
+            TextBlock disconnectMessage = new TextBlock();
+            disconnectMessage.Text = "Disconnected";
+            disconnectMessage.Foreground = ErrorColor;
+            disconnectMessage.TextWrapping = TextWrapping.Wrap;
+            disconnectMessage.Effect = new DropShadowEffect
+            {
+                ShadowDepth = 1,
+                Direction = 330,
+                Color = Colors.Black,
+                Opacity = 0.7,
+                BlurRadius = 2
+            };
+            Messages.Children.Add(disconnectMessage);
         }
     }
 }

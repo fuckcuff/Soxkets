@@ -51,6 +51,28 @@ namespace ServerHoster
                     StartButton.Content = "STOP";
                     //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\ServerHoster\iconactivated_25x.png"));
                     startButtonIsOn = true;
+
+                    /*
+                    while (startButtonIsOn)
+                    {
+                        string receivedMessage = new string(server.recievedBuff, 0, server.recievedBuff.Length);
+
+                        TextBlock message = new TextBlock();
+                        message.Foreground = Brushes.White;
+                        message.TextWrapping = TextWrapping.Wrap;
+                        message.Effect = new DropShadowEffect
+                        {
+                            ShadowDepth = 1,
+                            Direction = 330,
+                            Color = Colors.Black,
+                            Opacity = 0.7,
+                            BlurRadius = 2
+                        };
+
+                        message.Text = receivedMessage.Trim();
+                        Messages.Children.Add(message);
+                    }
+                    */
                 }
                 catch (Exception excep)
                 {
@@ -90,7 +112,7 @@ namespace ServerHoster
                             }
                             TextBlock message = new TextBlock();
                             message.Text = $"{serverName.Trim()}: " + Chatbox.Text.Trim();
-                            message.Foreground = Brushes.White;
+                            message.Foreground = Brushes.Gray;
                             message.TextWrapping = TextWrapping.Wrap;
                             message.Effect = new DropShadowEffect
                             {
