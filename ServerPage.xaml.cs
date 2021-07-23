@@ -41,7 +41,15 @@ namespace Soxkets
         public ServerPage()
         {
             InitializeComponent();
+            LoadSettings();
+        }
+
+        // Load settings
+        private void LoadSettings()
+        {
             startButtonIsOn = false;
+
+            // Load username
             if (File.Exists(servernamePath))
             {
                 serverName = File.ReadAllText(servernamePath);

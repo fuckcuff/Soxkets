@@ -26,6 +26,7 @@ namespace Soxkets
     public partial class ClientPage : Page
     {
         string usernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/username.txt";
+        string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         SolidColorBrush ErrorColor = new SolidColorBrush(Color.FromArgb(255, 255, 80, 80));
 
@@ -43,7 +44,17 @@ namespace Soxkets
         public ClientPage()
         {
             InitializeComponent();
+            LoadSettings();
+
+            Messages.Children.Clear(); // chatbox always starts with empty space at the top, pls fix. THIS DOESNT FIX IT
+        }
+
+        // Load settings
+        private void LoadSettings()
+        {
             server.IsConnected = false;
+
+            // Load username
             if (File.Exists(usernamePath))
             {
                 userName = File.ReadAllText(usernamePath);
@@ -315,8 +326,6 @@ namespace Soxkets
                 ClientUsernameTextbox.Foreground = Brushes.DarkGray;
                 ClientUsernameTextbox.TextAlignment = TextAlignment.Center;
                 userName = ClientUsernameTextbox.Text.Trim();
-
-                string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 
                 if (!Directory.Exists(appdataPath + @"/soxkets"))
                 {

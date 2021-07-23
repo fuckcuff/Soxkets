@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Soxkets"
         mc:Ignorable="d"
-        Title="Soxkets" Height="200" Width="375" MinWidth="375" MinHeight="150" MaxWidth="1920" MaxHeight="1040" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStyle="None" Icon="C:\Users\demented\Desktop\C#Programs\Soxkets\res\icon4.ico" ResizeMode="CanResizeWithGrip" AllowsTransparency="True">
+        Title="Soxkets" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Height="200" Width="375" MinWidth="375" MinHeight="150" MaxWidth="1920" MaxHeight="1040" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStyle="None" Icon="C:\Users\demented\Desktop\C#Programs\Soxkets\res\icon4.ico" AllowsTransparency="True">
+    <!-- Resizing -->
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CornerRadius="2" GlassFrameThickness="1" UseAeroCaptionButtons="False" CaptionHeight="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    
     <Grid MinWidth="200" Background="#FF323232">
+        
+        <!-- Page -->
         <Frame Name="Main" NavigationUIVisibility="Hidden"></Frame>
 
         <!-- Main Window Buttons -->

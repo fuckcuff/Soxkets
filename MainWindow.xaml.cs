@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AsyncServerLib;
 using AsyncClientLib;
+using System.Windows.Shell;
 
 namespace Soxkets
 {
@@ -23,28 +24,24 @@ namespace Soxkets
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Libraries
         AsyncServer server = new AsyncServer();
-
         AsyncClient client = new AsyncClient();
 
+        // Pages
         ServerPage serverPage = new ServerPage();
         ClientPage clientPage = new ClientPage();
 
-        bool isMaximized;
         string currentInterface;
 
+        // Main
         public MainWindow()
         {
             InitializeComponent();
-            isMaximized = false;
-
-            Main.Content = clientPage;
-            currentInterface = "client";
-
-            serverPage.startButtonIsOn = false;
+            LoadSettings();
         }
 
-        //INTERFACE TOGGLE
+        // Interface toggle button
         private void InterfaceToggle_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (currentInterface == "server")
@@ -59,7 +56,7 @@ namespace Soxkets
             }
         }
 
-        //CLOSE BUTTON
+        // Close button
         private void CloseButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (serverPage.startButtonIsOn)
@@ -83,54 +80,47 @@ namespace Soxkets
         {
             CloseBBG.Fill = new SolidColorBrush(Color.FromArgb(255, 80, 80, 80));
         }
-
         private void CloseBBG_MouseLeave(object sender, MouseEventArgs e)
         {
             CloseBBG.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
         }
 
-        //MINIMIZE BUTTON
+        // Minimize button
         private void MinimizeBBG_MouseEnter(object sender, MouseEventArgs e)
         {
             MinimizeBBG.Fill = new SolidColorBrush(Color.FromArgb(255, 80, 80, 80));
         }
-
         private void MinimizeBBG_MouseLeave(object sender, MouseEventArgs e)
         {
             MinimizeBBG.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
         }
-
-        //MAXIMIZE BUTTON
-        private void MaximizeBBG_MouseEnter(object sender, MouseEventArgs e)
-        {
-            MaximizeBBG.Fill = new SolidColorBrush(Color.FromArgb(255, 80, 80, 80));
-        }
-
-        private void MaximizeBBG_MouseLeave(object sender, MouseEventArgs e)
-        {
-            MaximizeBBG.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-        }
-
         private void MinimizeButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
+        // Maximize button
+        private void MaximizeBBG_MouseEnter(object sender, MouseEventArgs e)
+        {
+            MaximizeBBG.Fill = new SolidColorBrush(Color.FromArgb(255, 80, 80, 80));
+        }
+        private void MaximizeBBG_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MaximizeBBG.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+        }
         private void MaximizeButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (!isMaximized)
+            if (this.WindowState == WindowState.Maximized)
             {
-                WindowState = WindowState.Maximized;
-                isMaximized = true;
+                WindowState = WindowState.Normal;
             }
             else
             {
-                WindowState = WindowState.Normal;
-                isMaximized = false;
+                WindowState = WindowState.Maximized;
             }
         }
 
-        //DRAGGABLE SPACE
+        // Draggable space
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             try
@@ -140,6 +130,14 @@ namespace Soxkets
             catch (Exception)
             {
             }
+        }
+
+        // Load settings
+        private void LoadSettings()
+        {
+            Main.Content = clientPage;
+            currentInterface = "client";
+            serverPage.startButtonIsOn = false;
         }
     }
 }
