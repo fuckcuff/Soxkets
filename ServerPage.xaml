@@ -50,14 +50,13 @@
             </TextBox>
 
             <!-- Clients list box -->
-            <Grid>
-                <Rectangle VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="200" Height="100" Fill="#FF3E3E3E"/>
-                <StackPanel Name="ClientStack" Margin="15" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-
-                </StackPanel>
-                <Rectangle VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="200" Height="20" Fill="#FF2B2B2B"/>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="12.5" Foreground="White" ToolTip="A list of connected clients">Connected</TextBlock>
-                <Rectangle VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="200" Height="100" StrokeThickness="1" Stroke="#FF595959"/>
+            <Grid VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="200" Height="100">
+                <Rectangle Fill="#FF3E3E3E"/>
+                <Rectangle VerticalAlignment="Top" Grid.Row="1" Width="200" Height="20" Fill="#FF2B2B2B"/>
+                <TextBlock Name="ConnectedTitle"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2.5" Foreground="White" Height="14" ToolTip="A list of connected clients">Connected</TextBlock>
+                <StackPanel Name="ClientStack" VerticalAlignment="Bottom" CanVerticallyScroll="True" Width="Auto" Height="80" ScrollViewer.CanContentScroll="True"/>
+                <!-- Box Border -->
+                <Rectangle StrokeThickness="1" Stroke="#FF595959"/>
             </Grid>
         </StackPanel>
 

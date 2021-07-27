@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client.cs" />
     <Compile Include="ServerPage.xaml.cs">
       <DependentUpon>ServerPage.xaml</DependentUpon>
     </Compile>
@@ -150,6 +151,19 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\close.png" />
+    <Resource Include="res\icon.png" />
+    <Resource Include="res\icon2.png" />
+    <Resource Include="res\icon3.png" />
+    <Resource Include="res\icon4.ico" />
+    <Resource Include="res\icon4.png" />
+    <Resource Include="res\icon4activated.png" />
+    <Resource Include="res\iconactivated_25x.png" />
+    <Resource Include="res\icon_25x.png" />
+    <Resource Include="res\maximize.png" />
+    <Resource Include="res\minimize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

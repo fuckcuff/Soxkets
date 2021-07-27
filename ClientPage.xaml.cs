@@ -34,8 +34,6 @@ namespace Soxkets
 
         private bool AutoScroll = true;
 
-        //public bool isConnected;
-
         IPAddress ip = null;
         ushort port = 0;
 
@@ -46,7 +44,8 @@ namespace Soxkets
             InitializeComponent();
             LoadSettings();
 
-            Messages.Children.Clear(); // chatbox always starts with empty space at the top, pls fix. THIS DOESNT FIX IT
+
+            // chatbox always starts with empty space at the top, pls fix (_scrollViewer is causing it)
         }
 
         // Load settings
@@ -70,7 +69,7 @@ namespace Soxkets
                 try
                 {
                     ConnectButton.Foreground = Brushes.White;
-                    await server.Connect(ip, port);
+                    await server.Connect(ip, port, userName);
                     if (server.IsConnected)
                     {
                         ConnectButton.ToolTip = "Disconnects from the connected server";
@@ -113,7 +112,7 @@ namespace Soxkets
                 }
                 catch (Exception excep)
                 {
-                    System.Diagnostics.Debug.WriteLine("\nException from ClientPage Connect button: \n");
+                    System.Diagnostics.Debug.WriteLine("\nClientPage Exception> Connect button \n");
                     System.Diagnostics.Debug.WriteLine(excep.ToString());
                     ConnectButton.ToolTip = "Attempts to connect to the specified IP and port";
                     ConnectButton.Content = "CONNECT";

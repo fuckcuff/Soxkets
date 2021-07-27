@@ -18,6 +18,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
 using System.IO;
+using System.Collections;
 
 namespace Soxkets
 {
@@ -26,13 +27,13 @@ namespace Soxkets
     /// </summary>
     public partial class ServerPage : Page
     {
-        string servernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/servername.txt";
+        Hashtable clients = new Hashtable();
 
         AsyncServer server = new AsyncServer();
-
         IPAddress ip = null;
         ushort port = 0;
 
+        string servernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/servername.txt";
         string serverName;
         public bool startButtonIsOn;
 
@@ -42,7 +43,93 @@ namespace Soxkets
         {
             InitializeComponent();
             LoadSettings();
+            server.RaiseClientConnectedEvent += HandleClientConnected;
+            server.RaiseClientDisconnectedEvent += HandleClientDisconnected;
+            server.RaiseClientMessageEvent += HandleClientMessage;
         }
+
+        // Client message
+        private void HandleClientMessage(object sender, ClientMessageEventArgs e)
+        {
+            TextBlock message = new TextBlock();
+            message.Foreground = Brushes.White;
+            message.TextWrapping = TextWrapping.Wrap;
+            message.Effect = new DropShadowEffect
+            {
+                ShadowDepth = 1,
+                Direction = 330,
+                Color = Colors.Black,
+                Opacity = 0.7,
+                BlurRadius = 2
+            };
+
+            message.Text = e.Message;
+            Messages.Children.Add(message);
+        }
+
+        // New client event
+        private void HandleClientConnected(object sender, ClientConnectedEventArgs e)
+    {
+        // Add new client to ClientStack StackPanel
+        TextBlock newClient = new TextBlock();
+        newClient.Text = (e.NewClientUsername);
+        newClient.ToolTip = (e.NewClientIP);
+        newClient.Foreground = Brushes.White;
+        newClient.HorizontalAlignment = HorizontalAlignment.Center;
+        newClient.Width = 195;
+        newClient.TextAlignment = TextAlignment.Center;
+        newClient.Margin = new Thickness(2.5);
+
+        clients.Add(new Client(e.NewClientUsername, e.NewClientIP).IP, new Client(e.NewClientUsername, e.NewClientIP));
+        Debug.WriteLine($"ServerPage> clients.Count = {clients.Count}");
+
+        Debug.WriteLine("\n");
+        Debug.WriteLine($"ServerPage> New client: {e.NewClientUsername}");
+        Debug.WriteLine("\n");
+        Debug.WriteLine($"ServerPage> New client IP: {e.NewClientIP}");
+        Debug.WriteLine("\n");
+
+        ClientStack.Children.Add(newClient);
+
+        ConnectedTitle.Text = "Connected" + $" ({clients.Count})";
+    }
+
+        // Client disconnected event
+        private void HandleClientDisconnected(object sender, ClientDisconnectedEventArgs e)
+        {
+            try
+            {
+                for (int i = 0; i < clients.Count; i++)
+                {
+                    if ((string)ClientStack.Children.OfType<TextBlock>().ElementAt(i).ToolTip == e.IP)
+                    {
+                        ClientStack.Children.RemoveAt(i);
+                        Debug.WriteLine($"ServerPage> {e.IP} removed from ClientStack.Children");
+                        i++;
+                    }
+                }
+
+                clients.Remove(e.IP);
+                Debug.WriteLine($"ServerPage> clients.Count = {clients.Count}");
+
+                if (clients.Count > 0)
+                {
+                    ConnectedTitle.Text = "Connected" + $" ({clients.Count})";
+                }
+                else
+                {
+                    ConnectedTitle.Text = "Connected";
+                }
+            }
+            catch (Exception excep)
+            {
+                Debug.WriteLine("\n");
+                Debug.WriteLine($"ServerPage Exception> HandleClientDisconnected method");
+                Debug.WriteLine("\n");
+                Debug.WriteLine(excep.ToString());
+            }
+        }
+
 
         // Load settings
         private void LoadSettings()
@@ -113,6 +200,15 @@ namespace Soxkets
                 StartButton.Content = "START";
                 //InterfaceToggle.Source = new BitmapImage(new Uri(@"C:\Users\demented\Desktop\C#Programs\Soxkets\icon_25x.png"));
                 startButtonIsOn = false;
+
+                if (clients.Count > 0)
+                {
+                    ConnectedTitle.Text = "Connected" + $" ({clients.Count})";
+                }
+                else
+                {
+                    ConnectedTitle.Text = "Connected";
+                }
             }
         }
 

@@ -18,7 +18,7 @@
             <!-- Chatbox -->
             <Grid>
                 <Rectangle Name="ChatBG" VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="Auto" Height="100" Fill="#FF3E3E3E" StrokeThickness="1" Stroke="#FF595959"/>
-                <ScrollViewer Name="_scrollViewer" ScrollChanged="_scrollViewer_ScrollChanged" MaxHeight="90" Width="Auto" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" VerticalContentAlignment="Top">
+                <ScrollViewer Name="_scrollViewer" MaxHeight="90" Width="Auto" ScrollChanged="_scrollViewer_ScrollChanged" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True">
                     <StackPanel MaxHeight="90" Width="Auto" Name="Messages" Margin="15" CanVerticallyScroll="True" ScrollViewer.PanningMode="VerticalFirst" ScrollViewer.CanContentScroll="True"></StackPanel>
                 </ScrollViewer>
             </Grid>
