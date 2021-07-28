@@ -65,8 +65,6 @@ namespace Soxkets
 
             message.Text = e.Message;
             Messages.Children.Add(message);
-
-            server.SendToAll(e.Message, e.SenderEndPoint);
         }
 
         // New client event
