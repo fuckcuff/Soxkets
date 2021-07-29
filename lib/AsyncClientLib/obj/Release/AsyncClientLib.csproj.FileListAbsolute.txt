@@ -1,0 +1,6 @@
+C:\Users\demented\Desktop\C#Programs\AsyncClientLib\bin\Release\AsyncClientLib.dll
+C:\Users\demented\Desktop\C#Programs\AsyncClientLib\bin\Release\AsyncClientLib.pdb
+C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Release\AsyncClientLib.csproj.AssemblyReference.cache
+C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Release\AsyncClientLib.csproj.CoreCompileInputs.cache
+C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Release\AsyncClientLib.dll
+C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Release\AsyncClientLib.pdb

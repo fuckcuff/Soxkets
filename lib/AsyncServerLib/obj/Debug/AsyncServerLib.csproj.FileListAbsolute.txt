@@ -1,0 +1,6 @@
+C:\Users\demented\Desktop\C#Programs\AsyncServerLib\bin\Debug\AsyncServerLib.dll
+C:\Users\demented\Desktop\C#Programs\AsyncServerLib\bin\Debug\AsyncServerLib.pdb
+C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Debug\AsyncServerLib.csproj.CoreCompileInputs.cache
+C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Debug\AsyncServerLib.dll
+C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Debug\AsyncServerLib.pdb
+C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Debug\AsyncServerLib.csproj.AssemblyReference.cache
