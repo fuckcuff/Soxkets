@@ -122,8 +122,9 @@ namespace Soxkets
         }
         private void MaximizeButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (this.WindowState == WindowState.Maximized)
+            if (WindowState == WindowState.Maximized)
             {
+                
                 WindowState = WindowState.Normal;
             }
             else
@@ -137,16 +138,25 @@ namespace Soxkets
         {
             try
             {
+                if (WindowState == WindowState.Maximized)
+                {
+                    WindowState = WindowState.Normal;
+                    Left = Mouse.GetPosition(this).X - 200;
+                    Top = Mouse.GetPosition(this).Y - 30;
+                }
                 DragMove();
             }
-            catch (Exception)
+            catch (Exception exc)
             {
+                System.Diagnostics.Debug.WriteLine(exc.ToString());
             }
         }
 
         // Load settings
         private void LoadSettings()
         {
+            WindowState = WindowState.Normal;
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             Main.Content = clientPage;
             currentInterface = "client";
             serverPage.startButtonIsOn = false;

@@ -128,16 +128,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AsyncClientLib\AsyncClientLib.csproj">
-      <Project>{029d1d04-eeb6-4ee9-ab01-92cdfb21e666}</Project>
-      <Name>AsyncClientLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AsyncServerLib\AsyncServerLib.csproj">
-      <Project>{e6900d7a-095a-44be-b0b6-0e5cd9897b2c}</Project>
-      <Name>AsyncServerLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="icon4.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +154,16 @@
     <Resource Include="res\icon_25x.png" />
     <Resource Include="res\maximize.png" />
     <Resource Include="res\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="lib\AsyncClientLib\AsyncClientLib.csproj">
+      <Project>{029d1d04-eeb6-4ee9-ab01-92cdfb21e666}</Project>
+      <Name>AsyncClientLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="lib\AsyncServerLib\AsyncServerLib.csproj">
+      <Project>{e6900d7a-095a-44be-b0b6-0e5cd9897b2c}</Project>
+      <Name>AsyncServerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

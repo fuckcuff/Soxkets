@@ -5,37 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Soxkets"
         mc:Ignorable="d"
-        Title="Soxkets" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Height="325" Width="375" MinWidth="375" MinHeight="150" MaxWidth="1920" MaxHeight="1040" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStyle="None" Icon="/Soxkets;component/res/icon4.ico" AllowsTransparency="True">
+        Title="Soxkets" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Height="325" Width="375" MinWidth="375" MinHeight="150" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStyle="None" Icon="/Soxkets;component/res/icon4.ico" AllowsTransparency="True">
     <!-- Resizing -->
     <Window.Style>
         <Style TargetType="Window">
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
-                    <WindowChrome CornerRadius="2" GlassFrameThickness="1" UseAeroCaptionButtons="False" CaptionHeight="1"/>
+                    <WindowChrome CornerRadius="25" GlassFrameThickness="1" UseAeroCaptionButtons="False" ResizeBorderThickness="10" CaptionHeight="10"/>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Style>
-    
+
     <Grid MinWidth="200" Background="#FF323232">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="86*"/>
+            <RowDefinition Height="239*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="122*"/>
+        </Grid.ColumnDefinitions>
+
         <!-- Page -->
-        <Frame Name="Main" NavigationUIVisibility="Hidden"></Frame>
+        <Frame Name="Main" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.RowSpan="2"></Frame>
 
         <!-- Main Window Buttons -->
-        <Rectangle HorizontalAlignment="Center" VerticalAlignment="Top" Width="2000" Height="50" Fill="#FF252525" MouseDown="Rectangle_MouseDown"/>
-        <Border BorderThickness="2" BorderBrush="#FF191919"/>
-        <Rectangle MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="11.5" Fill="Transparent"/>
-        <Image ToolTip="Close" MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseButton" MouseUp="CloseButton_MouseUp" Source="/Soxkets;component/res/close.png"  Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12.5"></Image>
+        <Rectangle HorizontalAlignment="Center" VerticalAlignment="Top" Width="5000" Height="50" Fill="#FF252525" MouseDown="Rectangle_MouseDown" Grid.ColumnSpan="2" Margin="-812,0,-813,0"/>
+        <Border BorderThickness="2" BorderBrush="#FF191919" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Rectangle MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12,11,0" Fill="Transparent" Grid.Column="1"/>
+        <Image ToolTip="Close" MouseLeave="CloseBBG_MouseLeave" MouseEnter="CloseBBG_MouseEnter" Name="CloseButton" MouseUp="CloseButton_MouseUp" Source="/Soxkets;component/res/close.png"  Height="26" Width="24" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12,13,0" Grid.Column="1"></Image>
 
-        <Rectangle MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,11.5,41.5,0" Fill="Transparent"/>
-        <Image ToolTip="Maximize" MouseUp="MaximizeButton_MouseUp" MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeButton" Source="/Soxkets;component/res/maximize.png" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12.5,42,0"></Image>
+        <Rectangle MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12,41,0" Fill="Transparent" Grid.Column="1"/>
+        <Image ToolTip="Maximize" MouseUp="MaximizeButton_MouseUp" MouseEnter="MaximizeBBG_MouseEnter" MouseLeave="MaximizeBBG_MouseLeave" Name="MaximizeButton" Source="/Soxkets;component/res/maximize.png" Width="25" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12,42,0" Grid.Column="1"></Image>
 
-        <Rectangle MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,11.5,70.5,0" Fill="Transparent"/>
-        <Image ToolTip="Minimize" MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeButton" MouseUp="MinimizeButton_MouseUp" Source="/Soxkets;component/res/minimize.png" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12.5,71,0"></Image>
+        <Rectangle MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeBBG"  Width="26" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12,71,0" Fill="Transparent" Grid.Column="1"/>
+        <Image ToolTip="Minimize" MouseEnter="MinimizeBBG_MouseEnter" MouseLeave="MinimizeBBG_MouseLeave" Name="MinimizeButton" MouseUp="MinimizeButton_MouseUp" Source="/Soxkets;component/res/minimize.png" Height="26" Width="25" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,12,71,0" Grid.Column="1"></Image>
 
         <!-- Soxkets logo -->
-        <Image Name="InterfaceToggle" ToolTip="Switches between the server and client interface" Width="25" Height="25" Source="/Soxkets;component/res/icon_25x.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12.5" Stretch="Fill" MouseUp="InterfaceToggle_MouseUp"/>
-        <TextBlock MouseDown="Rectangle_MouseDown" HorizontalAlignment="Center" Height="52" TextWrapping="Wrap" Text="SOXKETS" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Foreground="White" Grid.Column="1" TextAlignment="Center" />
+        <Image Name="InterfaceToggle" ToolTip="Switches between the server and client interface" Width="26" Height="26" Source="/Soxkets;component/res/icon_25x.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,12,0,0" Stretch="Fill" MouseUp="InterfaceToggle_MouseUp" Grid.Column="1"/>
+        <TextBlock MouseDown="Rectangle_MouseDown" HorizontalAlignment="Center" Height="52" TextWrapping="Wrap" Text="SOXKETS" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Foreground="White" Grid.Column="1" TextAlignment="Center" Margin="102,0,110,0" />
     </Grid>
 </Window>

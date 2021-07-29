@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soxkets", "Soxkets.csproj", "{CE978CA0-085D-4FA2-933F-1CD081BD2464}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncServerLib", "..\AsyncServerLib\AsyncServerLib.csproj", "{E6900D7A-095A-44BE-B0B6-0E5CD9897B2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncServerLib", "lib\AsyncServerLib\AsyncServerLib.csproj", "{E6900D7A-095A-44BE-B0B6-0E5CD9897B2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncClientLib", "..\AsyncClientLib\AsyncClientLib.csproj", "{029D1D04-EEB6-4EE9-AB01-92CDFB21E666}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncClientLib", "lib\AsyncClientLib\AsyncClientLib.csproj", "{029D1D04-EEB6-4EE9-AB01-92CDFB21E666}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
