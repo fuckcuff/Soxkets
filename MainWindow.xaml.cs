@@ -24,10 +24,6 @@ namespace Soxkets
     /// </summary>
     public partial class MainWindow : Window
     {
-        // Libraries
-        AsyncServer server = new AsyncServer(); //! Doesnt work!
-        AsyncClient client = new AsyncClient(); //! Doesnt work!
-
         // Pages
         ServerPage serverPage = new ServerPage();
         ClientPage clientPage = new ClientPage();
@@ -75,20 +71,20 @@ namespace Soxkets
         // Close button
         private void CloseButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (serverPage.startButtonIsOn) //! use (server.KeepListening == true) when fixed
+            if (serverPage.server.KeepAccepting == true)
             {
                 var Result = MessageBox.Show("Your server is running, are you sure you want to exit?", "Soxkets", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (Result == MessageBoxResult.Yes)
                 {
-                    client.Disconnect(); //! Doesnt work!
-                    server.Stop(); //! Doesnt work!
+                    clientPage.server.Disconnect();
+                    serverPage.server.Stop();
                     Close();
                 }
             }
             else
             {
-                client.Disconnect(); //! Doesnt work!
-                server.Stop(); //! Doesnt work!
+                clientPage.server.Disconnect();
+                serverPage.server.Stop();
                 Close();
             }
         }

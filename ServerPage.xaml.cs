@@ -29,7 +29,7 @@ namespace Soxkets
     {
         Hashtable clients = new Hashtable();
 
-        AsyncServer server = new AsyncServer();
+        public AsyncServer server = new AsyncServer();
         IPAddress ip = null;
         ushort port = 0;
 

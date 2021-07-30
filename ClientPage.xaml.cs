@@ -30,7 +30,7 @@ namespace Soxkets
 
         SolidColorBrush ErrorColor = new SolidColorBrush(Color.FromArgb(255, 255, 80, 80));
 
-        AsyncClient server = new AsyncClient();
+        public AsyncClient server = new AsyncClient();
 
         private bool AutoScroll = true;
 
