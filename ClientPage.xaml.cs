@@ -345,6 +345,10 @@ namespace Soxkets
                 ClientUsernameTextbox.Foreground = Brushes.White;
             }
         }
+        private void ClientUsernameTextbox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ClientUsernameTextbox.Foreground = Brushes.White;
+        }
 
         // Client side message
         private void LocalDisconnectMessage()
@@ -390,5 +394,6 @@ namespace Soxkets
                 _scrollViewer.ScrollToVerticalOffset(_scrollViewer.ExtentHeight);
             }
         }
+
     }
 }

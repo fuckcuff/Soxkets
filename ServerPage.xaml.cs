@@ -351,7 +351,6 @@ namespace Soxkets
         }
 
         // Username box
-
         private void UsernameTextbox_MouseEnter(object sender, MouseEventArgs e)
         {
             if (UsernameTextbox.Text == "Username")
@@ -397,6 +396,10 @@ namespace Soxkets
             {
                 UsernameTextbox.Foreground = Brushes.White;
             }
+        }
+        private void UsernameTextbox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsernameTextbox.Foreground = Brushes.White;
         }
 
         // Auto scroll

@@ -120,7 +120,7 @@
         </TextBox>
 
         <!-- Username box -->
-        <TextBox Name="ClientUsernameTextbox" MouseEnter="ClientUsernameTextbox_MouseEnter" LostFocus="ClientUsernameTextbox_LostFocus" MouseLeave="ClientUsernameTextbox_MouseLeave" VerticalContentAlignment="Center" Text="Username" TextAlignment="Center" Foreground="DarkGray" Background="#FF646464" Grid.Row="2" Height="20" Width="100" Margin="0,0,250,0">
+        <TextBox Name="ClientUsernameTextbox" GotFocus="ClientUsernameTextbox_GotFocus" MouseEnter="ClientUsernameTextbox_MouseEnter" LostFocus="ClientUsernameTextbox_LostFocus" MouseLeave="ClientUsernameTextbox_MouseLeave" VerticalContentAlignment="Center" Text="Username" TextAlignment="Center" Foreground="DarkGray" Background="#FF646464" Grid.Row="2" Height="20" Width="100" Margin="0,0,250,0">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Setter Property="Template">
