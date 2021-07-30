@@ -4,3 +4,9 @@ C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Release\AsyncServerLib.c
 C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Release\AsyncServerLib.csproj.CoreCompileInputs.cache
 C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Release\AsyncServerLib.dll
 C:\Users\demented\Desktop\C#Programs\AsyncServerLib\obj\Release\AsyncServerLib.pdb
+C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\bin\Release\AsyncServerLib.dll
+C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\bin\Release\AsyncServerLib.pdb
+C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Release\AsyncServerLib.csproj.AssemblyReference.cache
+C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Release\AsyncServerLib.csproj.CoreCompileInputs.cache
+C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Release\AsyncServerLib.dll
+C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Release\AsyncServerLib.pdb

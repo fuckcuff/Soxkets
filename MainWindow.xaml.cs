@@ -25,8 +25,8 @@ namespace Soxkets
     public partial class MainWindow : Window
     {
         // Libraries
-        AsyncServer server = new AsyncServer();
-        AsyncClient client = new AsyncClient();
+        AsyncServer server = new AsyncServer(); //! Doesnt work!
+        AsyncClient client = new AsyncClient(); //! Doesnt work!
 
         // Pages
         ServerPage serverPage = new ServerPage();
@@ -46,10 +46,12 @@ namespace Soxkets
         {
             if (currentInterface == "server")
             {
+                /*
                 if (Width == 375 && Height == 450) // If default window size
                 {
                     Height = 325;
                 }
+                */
 
                 Main.Content = null;
                 Main.Content = clientPage;
@@ -57,10 +59,12 @@ namespace Soxkets
             }
             else if (currentInterface == "client")
             {
+                /*
                 if (Width == 375 && Height == 325) // If default window size
                 {
                     Height = 450;
                 }
+                */
 
                 Main.Content = null;
                 Main.Content = serverPage;
@@ -71,20 +75,20 @@ namespace Soxkets
         // Close button
         private void CloseButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (serverPage.startButtonIsOn)
+            if (serverPage.startButtonIsOn) //! use (server.KeepListening == true) when fixed
             {
                 var Result = MessageBox.Show("Your server is running, are you sure you want to exit?", "Soxkets", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (Result == MessageBoxResult.Yes)
                 {
-                    client.Disconnect();
-                    server.Stop();
+                    client.Disconnect(); //! Doesnt work!
+                    server.Stop(); //! Doesnt work!
                     Close();
                 }
             }
             else
             {
-                client.Disconnect();
-                server.Stop();
+                client.Disconnect(); //! Doesnt work!
+                server.Stop(); //! Doesnt work!
                 Close();
             }
         }
@@ -120,31 +124,48 @@ namespace Soxkets
         {
             MaximizeBBG.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
         }
-        private void MaximizeButton_MouseUp(object sender, MouseButtonEventArgs e)
+        protected void MaximizeButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (WindowState == WindowState.Maximized)
             {
-                
+                WindowChrome.GetWindowChrome(this).ResizeBorderThickness = new Thickness(10);
                 WindowState = WindowState.Normal;
             }
             else
             {
+                WindowChrome.GetWindowChrome(this).ResizeBorderThickness = new Thickness(0);
                 WindowState = WindowState.Maximized;
             }
         }
 
-        // Draggable space
+        // Window tab, dragging & maximizing
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                if (WindowState == WindowState.Maximized)
+                if (e.ChangedButton == MouseButton.Left && e.ClickCount > 1)
                 {
-                    WindowState = WindowState.Normal;
-                    Left = Mouse.GetPosition(this).X - 200;
-                    Top = Mouse.GetPosition(this).Y - 30;
+                    MaximizeButton_MouseUp(sender, e);
                 }
-                DragMove();
+                else
+                {
+                    if (WindowState == WindowState.Maximized && e.LeftButton == MouseButtonState.Pressed)
+                    {
+                        WindowState = WindowState.Normal;
+                        WindowChrome.GetWindowChrome(this).ResizeBorderThickness = new Thickness(10);
+                        Left = Mouse.GetPosition(this).X - 200;
+                        Top = Mouse.GetPosition(this).Y - 30;
+                    }
+
+                    DragMove();
+
+                    if (WindowState == WindowState.Maximized)
+                    {
+                        WindowChrome.GetWindowChrome(this).ResizeBorderThickness = new Thickness(0);
+                    }
+                }
+
+                
             }
             catch (Exception exc)
             {
@@ -155,6 +176,14 @@ namespace Soxkets
         // Load settings
         private void LoadSettings()
         {
+            WindowChrome.SetWindowChrome(this, new WindowChrome());
+
+            WindowChrome.GetWindowChrome(this).CornerRadius = new CornerRadius(25);
+            WindowChrome.GetWindowChrome(this).GlassFrameThickness = new Thickness(1);
+            WindowChrome.GetWindowChrome(this).UseAeroCaptionButtons = false;
+            WindowChrome.GetWindowChrome(this).ResizeBorderThickness = new Thickness(10);
+            WindowChrome.GetWindowChrome(this).CaptionHeight = 0;
+
             WindowState = WindowState.Normal;
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             Main.Content = clientPage;

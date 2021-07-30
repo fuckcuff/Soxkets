@@ -85,6 +85,7 @@ namespace Soxkets
                             TextBlock message = new TextBlock();
                             message.Foreground = Brushes.White;
                             message.TextWrapping = TextWrapping.Wrap;
+                            message.FontSize = 14;
                             message.Effect = new DropShadowEffect
                             {
                                 ShadowDepth = 1,
@@ -147,6 +148,7 @@ namespace Soxkets
                             TextBlock message = new TextBlock();
                             message.Foreground = Brushes.Gray;
                             message.TextWrapping = TextWrapping.Wrap;
+                            message.FontSize = 14;
                             message.Effect = new DropShadowEffect
                             {
                                 ShadowDepth = 1,
@@ -180,6 +182,7 @@ namespace Soxkets
                         message.Text = "Your message was not sent due to an error";
                         message.Foreground = ErrorColor;
                         message.TextWrapping = TextWrapping.Wrap;
+                        message.FontSize = 14;
                         message.Effect = new DropShadowEffect
                         {
                             ShadowDepth = 1,
@@ -200,6 +203,7 @@ namespace Soxkets
                         message.Text = "You are not connected to a server";
                         message.Foreground = ErrorColor;
                         message.TextWrapping = TextWrapping.Wrap;
+                        message.FontSize = 14;
                         message.Effect = new DropShadowEffect
                         {
                             ShadowDepth = 1,
@@ -224,7 +228,6 @@ namespace Soxkets
                 ClientIPTextbox.Foreground = Brushes.White;
             }
         }
-
         private void ClientIPTextbox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (ClientIPTextbox.Text == "")
@@ -246,7 +249,6 @@ namespace Soxkets
                 ClientIPTextbox.ToolTip = "Invalid IP: Enter a valid IP Address";
             }
         }
-
         private void ClientIPTextbox_MouseLeave(object sender, MouseEventArgs e)
         {
             if (ClientIPTextbox.Text == "" && !ClientIPTextbox.IsFocused)
@@ -267,7 +269,6 @@ namespace Soxkets
                 ClientPortTextbox.Foreground = Brushes.White;
             }
         }
-
         private void ClientPortTextbox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (ClientPortTextbox.Text == "")
@@ -289,7 +290,6 @@ namespace Soxkets
                 ClientPortTextbox.ToolTip = "Invalid port: Enter a number greater than 0 and smaller than 65535";
             }
         }
-
         private void ClientPortTextbox_MouseLeave(object sender, MouseEventArgs e)
         {
             if (ClientPortTextbox.Text == "" && !ClientPortTextbox.IsFocused)
@@ -310,7 +310,6 @@ namespace Soxkets
                 ClientUsernameTextbox.Foreground = Brushes.White;
             }
         }
-
         private void ClientUsernameTextbox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (ClientUsernameTextbox.Text == "")
@@ -333,7 +332,6 @@ namespace Soxkets
                 File.WriteAllText(usernamePath, userName);
             }
         }
-
         private void ClientUsernameTextbox_MouseLeave(object sender, MouseEventArgs e)
         {
             if (ClientUsernameTextbox.Text == "" && !ClientUsernameTextbox.IsFocused)
@@ -355,6 +353,7 @@ namespace Soxkets
             disconnectMessage.Text = "Disconnected";
             disconnectMessage.Foreground = ErrorColor;
             disconnectMessage.TextWrapping = TextWrapping.Wrap;
+            disconnectMessage.FontSize = 14;
             disconnectMessage.Effect = new DropShadowEffect
             {
                 ShadowDepth = 1,

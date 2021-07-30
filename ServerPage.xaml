@@ -14,55 +14,82 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1">
-            <!-- Chatbox -->
-            <Grid>
-                <Rectangle Name="ChatBG" VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="Auto" Height="100" Fill="#FF3E3E3E" StrokeThickness="1" Stroke="#FF595959"/>
-                <ScrollViewer Name="_scrollViewer" ScrollChanged="_scrollViewer_ScrollChanged" MaxHeight="90" Width="Auto" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" VerticalContentAlignment="Top">
-                    <StackPanel MaxHeight="90" Width="Auto" Name="Messages" Margin="15" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True"></StackPanel>
-                </ScrollViewer>
-            </Grid>
-            <TextBox KeyDown="Chatbox_KeyDown" Name="Chatbox" VerticalContentAlignment="Center" Background="#FF646464" HorizontalAlignment="Left" Grid.Row="1" Height="25" Width="5000" Margin="10" BorderBrush="#FF7E7E7E" Foreground="White">
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type TextBox}">
-                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsEnabled" Value="false">
-                                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="BorderBrush" TargetName="border" Value="#FF979797"/>
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="true">
-                                            <Setter Property="BorderBrush" TargetName="border" Value="#FFC1C1C1"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
 
-            <!-- Clients list box -->
-            <Grid VerticalAlignment="Top" Grid.Row="1" Margin="10" Width="200" Height="100">
-                <Rectangle Fill="#FF3E3E3E"/>
-                <Rectangle VerticalAlignment="Top" Grid.Row="1" Width="200" Height="20" Fill="#FF2B2B2B"/>
-                <TextBlock Name="ConnectedTitle"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2.5" Foreground="White" Height="14" ToolTip="A list of connected clients">Connected</TextBlock>
-                <StackPanel Name="ClientStack" VerticalAlignment="Bottom" CanVerticallyScroll="True" Width="Auto" Height="80" ScrollViewer.CanContentScroll="True"/>
-                <!-- Box Border -->
-                <Rectangle StrokeThickness="1" Stroke="#FF595959"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*">
+                </RowDefinition>
+                <RowDefinition Height="Auto">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="Auto">
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- Chatbox -->
+                <Grid Grid.Row="1" VerticalAlignment="Top" MinHeight="20" Height="Auto" Margin="10" Width="Auto">
+                    <Rectangle Name="ChatBG" Fill="#FF3E3E3E" StrokeThickness="1" Stroke="#FF595959"/>
+                    <ScrollViewer Name="_scrollViewer" Margin="5" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" ScrollChanged="_scrollViewer_ScrollChanged" CanContentScroll="True" VerticalContentAlignment="Top">
+                        <StackPanel Width="Auto" Name="Messages" Margin="0,0,0,30" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True"></StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <!-- Clients list box -->
+                <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" Width="150" Height="Auto">
+                    <Rectangle Fill="#FF3E3E3E"/>
+                    <Rectangle VerticalAlignment="Top" Grid.Row="1" Width="150" Height="20" Fill="#FF2B2B2B"/>
+                    <TextBlock Name="ConnectedTitle"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2.5" Foreground="White" Height="14" ToolTip="A list of connected clients">Connected</TextBlock>
+                    <StackPanel Name="ClientStack" VerticalAlignment="Top" Margin="20" CanVerticallyScroll="True" Width="Auto" Height="Auto" ScrollViewer.CanContentScroll="True"/>
+                    <!-- Box Border -->
+                    <Rectangle StrokeThickness="1" Stroke="#FF595959"/>
+                </Grid>
             </Grid>
-        </StackPanel>
+        </Grid>
+
+        <!-- Chat textbox background -->
+        <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Height="45" Width="5000">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#00323232"/>
+                    <GradientStop Color="#FF323232" Offset="0.50"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!-- Chat textbox -->
+        <TextBox KeyDown="Chatbox_KeyDown" Name="Chatbox" FontSize="14" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Background="#FF646464" HorizontalAlignment="Left" Grid.Row="1" Height="25" Width="5000" Margin="10" BorderBrush="#FF7E7E7E" Foreground="White">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="#FF979797"/>
+                                    </Trigger>
+                                    <Trigger Property="IsFocused" Value="true">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="#FFC1C1C1"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
 
         <!-- Bottom panel -->
         <Rectangle Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="5000" Height="100" Fill="#FF252525" Grid.ColumnSpan="2"></Rectangle>
-        
+
         <!-- IP and Port boxes -->
         <TextBox Name="IPTextbox" VerticalContentAlignment="Center" Text="IP" TextAlignment="Center" Foreground="DarkGray" Grid.Row="2" Width="100" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="250,25,0,0" Background="#FF646464" MouseEnter="IPTextbox_MouseEnter" MouseLeave="IPTextbox_MouseLeave" LostFocus="IPTextbox_LostFocus">
             <TextBox.Style>
@@ -90,7 +117,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        
+
         <TextBox Name="PortTextbox" VerticalContentAlignment="Center" Text="Port" TextAlignment="Center" Foreground="DarkGray" Grid.Row="2" Width="100" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="250,0,0,25" Background="#FF646464" MouseEnter="PortTextbox_MouseEnter" LostFocus="PortTextbox_LostFocus" MouseLeave="PortTextbox_MouseLeave">
             <TextBox.Style>
                 <Style TargetType="TextBox">
@@ -117,7 +144,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        
+
         <!-- Username box -->
         <TextBox Name="UsernameTextbox" MouseEnter="UsernameTextbox_MouseEnter" LostFocus="UsernameTextbox_LostFocus" MouseLeave="UsernameTextbox_MouseLeave" VerticalContentAlignment="Center" Text="Username" TextAlignment="Center" Foreground="DarkGray" Background="#FF646464" Grid.Row="2" Height="20" Width="100" Margin="0,0,250,0">
             <TextBox.Style>
@@ -145,7 +172,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        
+
         <!-- Start button -->
         <Button Grid.Row="2" ToolTip="Starts accepting connections on the specified IP and port" Name="StartButton" Width="100" Height="50" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold" Margin="25" BorderBrush="#FFBBBBBB" Foreground="White" PreviewMouseUp="StartButton_MouseUp" Content="START" Grid.Column="1">
             <Button.Style>
