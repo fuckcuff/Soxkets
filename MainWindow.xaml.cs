@@ -42,26 +42,12 @@ namespace Soxkets
         {
             if (currentInterface == "server")
             {
-                /*
-                if (Width == 375 && Height == 450) // If default window size
-                {
-                    Height = 325;
-                }
-                */
-
                 Main.Content = null;
                 Main.Content = clientPage;
                 currentInterface = "client";
             }
             else if (currentInterface == "client")
             {
-                /*
-                if (Width == 375 && Height == 325) // If default window size
-                {
-                    Height = 450;
-                }
-                */
-
                 Main.Content = null;
                 Main.Content = serverPage;
                 currentInterface = "server";

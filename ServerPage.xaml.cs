@@ -33,7 +33,8 @@ namespace Soxkets
         IPAddress ip = null;
         ushort port = 0;
 
-        string servernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/servername.txt";
+        string servernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/servername.txt";
+        string todayMessageLog = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/logs/" + DateTime.Today.ToShortDateString().Replace(' ', '_').Replace('/', '-') + "_messageLog.txt";
         string serverName;
         public bool startButtonIsOn;
 
@@ -65,6 +66,7 @@ namespace Soxkets
             message.Text = e.Message;
             Messages.Children.Add(message);
 
+            WriteToLogs($"({e.SenderEndPoint.ToString().Trim('\0', '\x00')}) {e.Message.ToString().Trim('\0', '\x00')}");
             server.SendToAll(e.Message, e.SenderEndPoint);
         }
 
@@ -90,6 +92,7 @@ namespace Soxkets
             Debug.WriteLine($"ServerPage> New client IP: {e.NewClientIP}");
             Debug.WriteLine("\n");
 
+            WriteToLogs($"{e.NewClientUsername.Trim('\0', '\x00')} ({e.NewClientIP.Trim('\0', '\x00')}) connected");
             ClientStack.Children.Add(newClient);
 
             ConnectedTitle.Text = "Connected" + $" ({clients.Count})";
@@ -134,6 +137,8 @@ namespace Soxkets
         // Set-up
         private void LoadSettings()
         {
+            MakeSoxketsDir();
+            MakeLogsDir();
             startButtonIsOn = false;
 
             // Load username
@@ -158,6 +163,10 @@ namespace Soxkets
                 try
                 {
                     server.StartListening(ip, port);
+
+                    MakeSoxketsDir();
+                    MakeLogsDir();
+
                     StartButton.ToolTip = "Stops accepting connections and drops all existing ones";
                     StartButton.Content = "STOP";
                     startButtonIsOn = true;
@@ -218,6 +227,8 @@ namespace Soxkets
                                 Opacity = 0.7,
                                 BlurRadius = 2
                             };
+
+                            WriteToLogs(message.Text);
                             server.SendToAll(message.Text);
                             Messages.Children.Add(message);
                             Chatbox.Text = "";
@@ -377,10 +388,7 @@ namespace Soxkets
 
                 string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-                if (!Directory.Exists(appdataPath + @"/soxkets"))
-                {
-                    Directory.CreateDirectory(appdataPath + @"/soxkets");
-                }
+                MakeSoxketsDir();
                 File.WriteAllText(servernamePath, serverName);
             }
         }
@@ -426,6 +434,33 @@ namespace Soxkets
                 // Autoscroll
                 _scrollViewer.ScrollToVerticalOffset(_scrollViewer.ExtentHeight);
             }
+        }
+
+        // Create directories
+        private void MakeSoxketsDir()
+        {
+            if (!(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets")))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets");
+            }
+        }
+        private void MakeLogsDir()
+        {
+            MakeSoxketsDir();
+            if (!(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/logs")))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/logs");
+            }
+            if (!(File.Exists(todayMessageLog)))
+            {
+                Debug.WriteLine($"Attempting to create {todayMessageLog}");
+                File.Create(todayMessageLog);
+            }
+        }
+        private void WriteToLogs(string text)
+        {
+            MakeLogsDir();
+            File.AppendAllText(todayMessageLog, $"({DateTime.Now}) Server Page: \"{text.Trim('\0', '\x00')}\"\n");
         }
     }
 }

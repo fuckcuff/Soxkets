@@ -51,7 +51,7 @@ namespace AsyncServerLib
             IPAddress ip;
             if (!IPAddress.TryParse(ep[0], out ip))
             {
-                throw new FormatException("Invalid ip-adress");
+                throw new FormatException("Invalid IP");
             }
             int port;
             if (!int.TryParse(ep[1], NumberStyles.None, NumberFormatInfo.CurrentInfo, out port))

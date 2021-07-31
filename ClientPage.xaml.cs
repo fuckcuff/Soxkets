@@ -25,8 +25,9 @@ namespace Soxkets
     /// </summary>
     public partial class ClientPage : Page
     {
-        string usernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/soxkets/username.txt";
         string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string usernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/username.txt";
+        string todayMessageLog = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/logs/" + DateTime.Today.ToShortDateString().Replace(' ', '_').Replace('/', '-') + "_messageLog.txt";
 
         SolidColorBrush ErrorColor = new SolidColorBrush(Color.FromArgb(255, 255, 80, 80));
 
@@ -43,14 +44,13 @@ namespace Soxkets
         {
             InitializeComponent();
             LoadSettings();
-
-
-            // chatbox always starts with empty space at the top, pls fix (_scrollViewer is causing it)
         }
 
         // Load settings
         private void LoadSettings()
         {
+            MakeSoxketsDir();
+            MakeLogsDir();
             server.IsConnected = false;
 
             // Load username
@@ -76,11 +76,15 @@ namespace Soxkets
                         ConnectButton.Content = "DISCONNECT";
                         ConnectButton.Foreground = Brushes.White;
                         server.IsConnected = true;
+
+                        MakeSoxketsDir();
+                        MakeLogsDir();
+
                         while (server.IsConnected)
                         {
                             Array.Clear(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length);
                             await server.ReadMessage();
-                            string receivedMessage = Encoding.ASCII.GetString(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length);
+                            string receivedMessage = Encoding.ASCII.GetString(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length).Trim();
 
                             TextBlock message = new TextBlock();
                             message.Foreground = Brushes.White;
@@ -98,6 +102,7 @@ namespace Soxkets
                             message.Text = receivedMessage.Trim();
                             if (server.IsConnected)
                             {
+                                WriteToLogs(receivedMessage);
                                 Messages.Children.Add(message);
                             }
                         }
@@ -169,6 +174,7 @@ namespace Soxkets
                                 server.SendMessage(userName, message.Text);
                             }
 
+                            WriteToLogs(message.Text);
                             message.Text = $"{userName.Trim()}: " + Chatbox.Text.Trim();
                             Messages.Children.Add(message);
 
@@ -324,11 +330,8 @@ namespace Soxkets
                 ClientUsernameTextbox.Foreground = Brushes.DarkGray;
                 ClientUsernameTextbox.TextAlignment = TextAlignment.Center;
                 userName = ClientUsernameTextbox.Text.Trim();
-                
-                if (!Directory.Exists(appdataPath + @"/soxkets"))
-                {
-                    Directory.CreateDirectory(appdataPath + @"/soxkets");
-                }
+
+                MakeSoxketsDir();
                 File.WriteAllText(usernamePath, userName);
             }
         }
@@ -395,5 +398,30 @@ namespace Soxkets
             }
         }
 
+        // Create directories
+        private void MakeSoxketsDir()
+        {
+            if (!(Directory.Exists(appdataPath + @"/.soxkets")))
+            {
+                Directory.CreateDirectory(appdataPath + @"/.soxkets");
+            }
+        }
+        private void MakeLogsDir()
+        {
+            MakeSoxketsDir();
+            if (!(Directory.Exists(appdataPath + @"/.soxkets/logs")))
+            {
+                Directory.CreateDirectory(appdataPath + @"/.soxkets/logs");
+            }
+            if (!(File.Exists(todayMessageLog)))
+            {
+                File.Create(todayMessageLog);
+            }
+        }
+        private void WriteToLogs(string text)
+        {
+            MakeLogsDir();
+            File.AppendAllText(todayMessageLog, $"({DateTime.Now}) Client Page: \"{text.Trim('\0', '\x00')}\"\n");
+        }
     }
 }
