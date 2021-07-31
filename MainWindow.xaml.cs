@@ -31,7 +31,7 @@ namespace Soxkets
         string currentInterface;
 
         // Main
-        public MainWindow()
+        public MainWindow() //! Add profile button for profile picture option
         {
             InitializeComponent();
             LoadSettings();

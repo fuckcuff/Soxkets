@@ -40,7 +40,7 @@ namespace Soxkets
 
         private bool AutoScroll = true;
 
-        public ServerPage()
+        public ServerPage() //! Add kick client option
         {
             InitializeComponent();
             LoadSettings();
@@ -228,7 +228,7 @@ namespace Soxkets
                                 BlurRadius = 2
                             };
 
-                            WriteToLogs(message.Text);
+                            WriteToLogs(message.Text.Trim('\0', '\x00'));
                             server.SendToAll(message.Text);
                             Messages.Children.Add(message);
                             Chatbox.Text = "";

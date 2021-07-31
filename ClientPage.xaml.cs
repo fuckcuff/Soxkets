@@ -84,7 +84,7 @@ namespace Soxkets
                         {
                             Array.Clear(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length);
                             await server.ReadMessage();
-                            string receivedMessage = Encoding.ASCII.GetString(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length).Trim();
+                            string receivedMessage = Encoding.ASCII.GetString(server.recievedMessageBuff, 0, server.recievedMessageBuff.Length).Trim().Trim('\0', '\x00');
 
                             TextBlock message = new TextBlock();
                             message.Foreground = Brushes.White;
@@ -102,7 +102,7 @@ namespace Soxkets
                             message.Text = receivedMessage.Trim();
                             if (server.IsConnected)
                             {
-                                WriteToLogs(receivedMessage);
+                                WriteToLogs(receivedMessage.Trim('\0', '\x00'));
                                 Messages.Children.Add(message);
                             }
                         }
