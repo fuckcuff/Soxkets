@@ -5,16 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Soxkets"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="250" d:DesignWidth="375"
       Title="ClientPage">
-
+    <Page.Resources>
+        <ContextMenu x:Key="contextMenu">
+            <MenuItem Header="Remove"
+                      Click="ResetPfp_Click"
+                      CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+        </ContextMenu>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Chatbox -->
         <Grid Grid.Row="1" VerticalAlignment="Top" MinHeight="20" Height="Auto" Margin="10" Width="Auto">
             <Rectangle Name="ChatBG" Fill="#FF3E3E3E" StrokeThickness="1" Stroke="#FF595959"/>
@@ -61,7 +67,7 @@
             </TextBox.Style>
         </TextBox>
 
-            <!-- Bottom Panel -->
+        <!-- Bottom Panel -->
         <Rectangle Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="5000" Height="100" Fill="#FF252525" Grid.ColumnSpan="2"></Rectangle>
         
         <!-- IP and Port boxes -->
@@ -118,35 +124,52 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-
-        <!-- Username box -->
-        <TextBox Name="ClientUsernameTextbox" GotFocus="ClientUsernameTextbox_GotFocus" MouseEnter="ClientUsernameTextbox_MouseEnter" LostFocus="ClientUsernameTextbox_LostFocus" MouseLeave="ClientUsernameTextbox_MouseLeave" VerticalContentAlignment="Center" Text="Username" TextAlignment="Center" Foreground="DarkGray" Background="#FF646464" Grid.Row="2" Height="20" Width="100" Margin="0,0,250,0">
-            <TextBox.Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type TextBox}">
-                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsEnabled" Value="false">
-                                        <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="BorderBrush" TargetName="border" Value="#FF979797"/>
-                                    </Trigger>
-                                    <Trigger Property="IsFocused" Value="true">
-                                        <Setter Property="BorderBrush" TargetName="border" Value="#FFC1C1C1"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
         
+        <!-- Personalize -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
+                <StackPanel>
+                    <!-- Username box -->
+                    <TextBox Name="ClientUsernameTextbox" GotFocus="ClientUsernameTextbox_GotFocus" MouseEnter="ClientUsernameTextbox_MouseEnter" LostFocus="ClientUsernameTextbox_LostFocus" MouseLeave="ClientUsernameTextbox_MouseLeave" VerticalContentAlignment="Center" Text="Username" TextAlignment="Center" Foreground="DarkGray" Background="#FF646464" Grid.Column="0" Height="20" Width="100">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF979797"/>
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFC1C1C1"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <!-- Profile Picture -->
+                    <Grid Height="32" Width="32" Margin="0,10,0,0">
+                        <Image Name="PfpImg" Source="/Soxkets;component/res/emptypfp.png" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Change your profile picture" MaxHeight="32" MaxWidth="32" MinHeight="32" MinWidth="32" PreviewMouseUp="PfpImg_PreviewMouseUp"></Image>
+                    </Grid>
+                </StackPanel>
+                <Image Source="/Soxkets;component/res/pfpoutline.png" DragDrop.Drop="Image_Drop" DragDrop.DragEnter="Image_DragEnter" AllowDrop="True" Margin="0,23,0,0" Width="46" Height="46" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Change your profile picture" PreviewMouseUp="PfpImg_PreviewMouseUp"></Image>
+            </Grid>
+        </Grid>
+
         <!-- Connect button -->
         <Button Name="ConnectButton" PreviewMouseUp="ConnectButton_MouseUp" Grid.Row="2" ToolTip="Connect to the specified IP and port" Width="100" MaxWidth="105" MaxHeight="55" Height="50" VerticalAlignment="Bottom" FontSize="14" FontWeight="Bold" Margin="25" BorderBrush="#FFBBBBBB" Foreground="White" Content="CONNECT" Grid.Column="1">
             <Button.Style>

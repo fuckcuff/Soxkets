@@ -33,8 +33,10 @@ namespace Soxkets
         IPAddress ip = null;
         ushort port = 0;
 
+        string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         string servernamePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/servername.txt";
         string todayMessageLog = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/.soxkets/logs/" + DateTime.Today.ToShortDateString().Replace(' ', '_').Replace('/', '-') + "_messageLog.txt";
+        
         string serverName;
         public bool startButtonIsOn;
 
@@ -146,6 +148,23 @@ namespace Soxkets
             {
                 serverName = File.ReadAllText(servernamePath);
                 UsernameTextbox.Text = serverName;
+            }
+
+            // Load Profile Picture
+            if (File.Exists(appdataPath + @"/.soxkets/server_pfp.png"))
+            {
+                BitmapImage pfp = new BitmapImage();
+
+                using (var stream = File.OpenRead(appdataPath + "/.soxkets/server_pfp.png"))
+                {
+                    pfp.BeginInit();
+                    pfp.CacheOption = BitmapCacheOption.OnLoad;
+                    pfp.StreamSource = stream;
+                    pfp.EndInit();
+                }
+
+                PfpImg.Source = pfp;
+                PfpImg.Stretch = Stretch.UniformToFill;
             }
         }
         private void LoadEvents()
@@ -461,6 +480,109 @@ namespace Soxkets
         {
             MakeLogsDir();
             File.AppendAllText(todayMessageLog, $"({DateTime.Now}) Server Page: \"{text.Trim('\0', '\x00')}\"\n");
+        }
+
+        // Profile picture
+        private void PfpImg_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                // Create OpenFileDialog
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+                // Set filter for file extension and default file extension
+                //dlg.DefaultExt = ".png";
+                dlg.Filter = "Images | *.jpg; *.jpeg; *.png; *.gif";
+
+                // Display OpenFileDialog by calling ShowDialog method
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Get the selected file name and display in a TextBox
+                if (result == true)
+                {
+                    // Open document
+                    try
+                    {
+                        MakeSoxketsDir();
+
+                        System.Diagnostics.Debug.WriteLine($"Copying {dlg.FileName} to {appdataPath + @"/.soxkets/server_pfp.png"}");
+                        File.Copy(dlg.FileName, appdataPath + @"/.soxkets/server_pfp.png", true);
+
+                        BitmapImage importedImage = new BitmapImage();
+
+                        using (var stream = File.OpenRead(appdataPath + "/.soxkets/server_pfp.png"))
+                        {
+                            importedImage.BeginInit();
+                            importedImage.CacheOption = BitmapCacheOption.OnLoad;
+                            importedImage.StreamSource = stream;
+                            importedImage.EndInit();
+                        }
+
+                        PfpImg.Source = importedImage;
+                        PfpImg.Stretch = Stretch.UniformToFill;
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"Could not convert selected file to image", "Soxkets", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
+                ContextMenu menu = (ContextMenu)Resources["contextMenu"];
+                menu.IsOpen = true;
+            }
+        }
+        private void ResetPfp_Click(object sender, RoutedEventArgs e)
+        {
+            BitmapImage emptyPfp = new BitmapImage();
+            emptyPfp.BeginInit();
+            emptyPfp.UriSource = new Uri(@"/Soxkets;component/res/emptypfp.png", UriKind.Relative);
+            emptyPfp.EndInit();
+            PfpImg.Source = emptyPfp;
+        }
+        private void Image_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    // Note that you can have more than one file.
+                    string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                    // Assuming you have one file that you care about, pass it off to whatever
+                    // handling code you have defined.
+                    BitmapImage importedImage = new BitmapImage();
+
+                    using (var stream = File.OpenRead(file[0]))
+                    {
+                        importedImage.BeginInit();
+                        importedImage.CacheOption = BitmapCacheOption.OnLoad;
+                        importedImage.StreamSource = stream;
+                        importedImage.EndInit();
+                    }
+
+                    System.Diagnostics.Debug.WriteLine($"Copying {file[0]} to {appdataPath + @"/.soxkets/server_pfp.png"}");
+                    File.Copy(file[0], appdataPath + @"/.soxkets/server_pfp.png", true);
+
+                    PfpImg.Source = importedImage;
+                }
+            }
+            catch
+            {
+                MessageBox.Show($"Could not convert selected file to image", "Soxkets", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void Image_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Bitmap))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
         }
     }
 }

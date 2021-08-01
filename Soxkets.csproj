@@ -165,5 +165,11 @@
       <Name>AsyncServerLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\emptypfp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\pfpoutline.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
