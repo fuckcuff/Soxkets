@@ -86,7 +86,7 @@ namespace AsyncServerLib
                 if (listener != null)
                 {
                     listener.Stop();
-                    //KeepAccepting = false;
+                    KeepAccepting = false; // why was this commented out
                 }
                 foreach (TcpClient client in clients)
                 {
@@ -218,6 +218,8 @@ namespace AsyncServerLib
             Array.Clear(messageBuff, 0, messageBuff.Length);
 
         }
+
+        // Events
         protected virtual void OnRaiseClientMessageEvent(ClientMessageEventArgs e)
         {
             EventHandler<ClientMessageEventArgs> handler = RaiseClientMessageEvent;

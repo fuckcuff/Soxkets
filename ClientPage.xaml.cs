@@ -167,11 +167,69 @@ namespace Soxkets
                             {
                                 userName = "You";
                             }
-                            TextBlock message = new TextBlock();
-                            message.Foreground = Brushes.Gray;
-                            message.TextWrapping = TextWrapping.Wrap;
-                            message.FontSize = 14;
-                            message.Effect = new DropShadowEffect
+
+                            // Create profile picture 
+                            BitmapImage msgPfpImg = new BitmapImage();
+                            if (File.Exists(appdataPath + @"/.soxkets/client_pfp.png"))
+                            {
+                                using (var stream = File.OpenRead(appdataPath + "/.soxkets/client_pfp.png"))
+                                {
+                                    msgPfpImg.BeginInit();
+                                    msgPfpImg.CacheOption = BitmapCacheOption.OnLoad;
+                                    msgPfpImg.StreamSource = stream;
+                                    msgPfpImg.EndInit();
+                                }
+                            }
+                            else
+                            {
+                                msgPfpImg.BeginInit();
+                                msgPfpImg.UriSource = new Uri(@"/Soxkets;component/res/defaultpfp.png", UriKind.Relative);
+                                msgPfpImg.EndInit();
+                            }
+                            Image msgPfp = new Image();
+                            msgPfp.Source = msgPfpImg;
+                            msgPfp.MaxHeight = 32;
+                            msgPfp.MaxWidth = 32;
+                            msgPfp.MinHeight = 32;
+                            msgPfp.MinWidth = 32;
+
+
+                            // Create message profile picture frame
+                            BitmapImage msgPfpFrameImg = new BitmapImage();
+                            msgPfpFrameImg.BeginInit();
+                            msgPfpFrameImg.UriSource = new Uri(@"/Soxkets;component/res/msgframe.png", UriKind.Relative);
+                            msgPfpFrameImg.EndInit();
+                            Image msgPfpFrame = new Image();
+                            msgPfpFrame.Source = msgPfpFrameImg;
+                            msgPfpFrame.MaxHeight = 46;
+                            msgPfpFrame.MaxWidth = 46;
+                            msgPfpFrame.MinHeight = 46;
+                            msgPfpFrame.MinWidth = 46;
+                            msgPfpFrame.HorizontalAlignment = HorizontalAlignment.Center;
+                            msgPfpFrame.VerticalAlignment = VerticalAlignment.Center;
+
+                            // Create Grid for Pfp and Pfp Frame
+                            Grid pfpGrid = new Grid();
+                            pfpGrid.HorizontalAlignment = HorizontalAlignment.Center;
+                            pfpGrid.VerticalAlignment = VerticalAlignment.Top;
+                            pfpGrid.MaxHeight = 34;
+                            pfpGrid.MaxWidth = 34;
+                            pfpGrid.Children.Add(msgPfp);
+                            pfpGrid.Children.Add(msgPfpFrame);
+
+                            // Create message TextBlock
+                            if (userName == null || string.IsNullOrEmpty(userName))
+                            {
+                                userName = "Server";
+                            }
+                            TextBlock messageTB = new TextBlock();
+                            messageTB.Text = $"{userName.Trim()}: " + Chatbox.Text.Trim();
+                            messageTB.Foreground = Brushes.Gray;
+                            messageTB.TextWrapping = TextWrapping.Wrap;
+                            messageTB.FontSize = 14;
+                            messageTB.VerticalAlignment = VerticalAlignment.Center;
+                            messageTB.Margin = new Thickness(5, 0, 0, 0);
+                            messageTB.Effect = new DropShadowEffect
                             {
                                 ShadowDepth = 1,
                                 Direction = 330,
@@ -180,21 +238,116 @@ namespace Soxkets
                                 BlurRadius = 2
                             };
 
-                            message.Text = Chatbox.Text.Trim();
+                            // NEW MESSAGE (Pfp + Message)
+                            DockPanel newMessage = new DockPanel();
+                            newMessage.Name = "Local";
 
-                            if (userName == "You")
+                            newMessage.Margin = new Thickness(5);
+                            newMessage.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+                            if (Messages.Children.Count <= 0) // First message ever
                             {
-                                server.SendMessage("Client", message.Text);
+                                // Add profile picture
+                                newMessage.Children.Add(pfpGrid);
+                                DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Left);
+
+                                /*
+                                // Add username textblock above message
+                                TextBlock usernameTB = new TextBlock();
+                                usernameTB.Text = userName;
+                                usernameTB.Foreground = Brushes.White;
+                                usernameTB.TextWrapping = TextWrapping.Wrap;
+                                usernameTB.FontSize = 14;
+                                usernameTB.VerticalAlignment = VerticalAlignment.Center;
+                                usernameTB.Margin = new Thickness(5, 0, 0, 0);
+                                usernameTB.Effect = new DropShadowEffect
+                                {
+                                    ShadowDepth = 1,
+                                    Direction = 330,
+                                    Color = Colors.Black,
+                                    Opacity = 0.7,
+                                    BlurRadius = 2
+                                };
+                                newMessage.Children.Add(usernameTB);
+                                DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Top);
+                                */
+
+                                // Add message textblock
+                                newMessage.Children.Add(messageTB);
+                                DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Top);
+
+                                Messages.Children.Add(newMessage);
                             }
                             else
                             {
-                                server.SendMessage(userName, message.Text);
+                                if (Messages.Children[Messages.Children.Count - 1] is DockPanel msg)
+                                {
+                                    if (msg.Name == "Local")
+                                    {
+                                        msg.Children.Add(messageTB); // CANT add new TextBlock to already existing StackPanel msg
+                                        DockPanel.SetDock(msg.Children[msg.Children.Count - 1], Dock.Top);
+                                    }
+                                    else
+                                    {
+                                        // Add profile picture
+                                        newMessage.Children.Add(pfpGrid);
+                                        DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Left);
+
+                                        /*
+                                        TextBlock usernameTB = new TextBlock();
+                                        usernameTB.Text = userName;
+                                        usernameTB.Foreground = Brushes.White;
+                                        usernameTB.TextWrapping = TextWrapping.Wrap;
+                                        usernameTB.FontSize = 14;
+                                        usernameTB.VerticalAlignment = VerticalAlignment.Center;
+                                        usernameTB.Margin = new Thickness(5, 0, 0, 0);
+                                        usernameTB.Effect = new DropShadowEffect
+                                        {
+                                            ShadowDepth = 1,
+                                            Direction = 330,
+                                            Color = Colors.Black,
+                                            Opacity = 0.7,
+                                            BlurRadius = 2
+                                        };
+
+                                        // Add username textblock above message
+                                        newMessage.Children.Add(usernameTB);
+                                        DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Top);
+                                        */
+
+                                        // Add message textblock
+                                        newMessage.Children.Add(messageTB);
+                                        DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Top);
+
+                                        Messages.Children.Add(newMessage);
+                                    }
+                                }
+                                else
+                                {
+
+                                    newMessage.Children.Add(pfpGrid);
+                                    DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Left);
+
+                                    newMessage.Children.Add(messageTB); //message wont wrap here
+                                    DockPanel.SetDock(newMessage.Children[newMessage.Children.Count - 1], Dock.Top);
+
+                                    Messages.Children.Add(newMessage);
+                                }
                             }
 
-                            WriteToLogs(message.Text);
-                            message.Text = $"{userName.Trim()}: " + Chatbox.Text.Trim();
-                            Messages.Children.Add(message);
+                            messageTB.Text = Chatbox.Text.Trim();
+                            if (userName == "You")
+                            {
+                                server.SendMessage("Client", messageTB.Text);
+                            }
+                            else
+                            {
+                                server.SendMessage(userName, messageTB.Text);
+                            }
 
+                            messageTB.Text = $"{userName.Trim()}: " + Chatbox.Text.Trim();
+                            WriteToLogs(messageTB.Text.Trim('\0', '\x00'));
                             Chatbox.Text = "";
                         }
                     }
@@ -497,8 +650,14 @@ namespace Soxkets
         {
             BitmapImage emptyPfp = new BitmapImage();
             emptyPfp.BeginInit();
-            emptyPfp.UriSource = new Uri(@"/Soxkets;component/res/emptypfp.png", UriKind.Relative);
+            emptyPfp.UriSource = new Uri(@"/Soxkets;component/res/defaultpfp.png", UriKind.Relative);
             emptyPfp.EndInit();
+
+            if (File.Exists(appdataPath + @"/.soxkets/client_pfp.png"))
+            {
+                File.Delete(appdataPath + @"/.soxkets/client_pfp.png");
+            }
+
             PfpImg.Source = emptyPfp;
         }
         private void Image_Drop(object sender, DragEventArgs e)

@@ -166,10 +166,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\emptypfp.png" />
+    <Resource Include="res\pfpoutline.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\pfpoutline.png" />
+    <Resource Include="res\defaultpfp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\msgframe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

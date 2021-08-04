@@ -24,8 +24,8 @@
         <!-- Chatbox -->
         <Grid Grid.Row="1" VerticalAlignment="Top" MinHeight="20" Height="Auto" Margin="10" Width="Auto">
             <Rectangle Name="ChatBG" Fill="#FF3E3E3E" StrokeThickness="1" Stroke="#FF595959"/>
-            <ScrollViewer Name="_scrollViewer" Margin="5" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" ScrollChanged="_scrollViewer_ScrollChanged" CanContentScroll="True" VerticalContentAlignment="Top">
-                <StackPanel Width="Auto" Name="Messages" Margin="0,0,0,30" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True"></StackPanel>
+            <ScrollViewer Name="_scrollViewer" Margin="5" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" ScrollChanged="_scrollViewer_ScrollChanged" VerticalContentAlignment="Top">
+                <StackPanel Width="Auto" Name="Messages" Margin="0,0,0,30" CanVerticallyScroll="True"></StackPanel>
             </ScrollViewer>
         </Grid>
 
@@ -163,7 +163,7 @@
                     </TextBox>
                     <!-- Profile Picture -->
                     <Grid Height="32" Width="32" Margin="0,10,0,0">
-                        <Image Name="PfpImg" Source="/Soxkets;component/res/emptypfp.png" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Change your profile picture" MaxHeight="32" MaxWidth="32" MinHeight="32" MinWidth="32" PreviewMouseUp="PfpImg_PreviewMouseUp"></Image>
+                        <Image Name="PfpImg" Source="/Soxkets;component/res/defaultpfp.png" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Change your profile picture" MaxHeight="32" MaxWidth="32" MinHeight="32" MinWidth="32" PreviewMouseUp="PfpImg_PreviewMouseUp"></Image>
                     </Grid>
                 </StackPanel>
                 <Image Source="/Soxkets;component/res/pfpoutline.png" DragDrop.Drop="Image_Drop" DragDrop.DragEnter="Image_DragEnter" AllowDrop="True" Margin="0,23,0,0" Width="46" Height="46" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Change your profile picture" PreviewMouseUp="PfpImg_PreviewMouseUp"></Image>
