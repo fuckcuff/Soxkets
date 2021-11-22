@@ -4,3 +4,9 @@ C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Debug\AsyncClientLib.csp
 C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Debug\AsyncClientLib.dll
 C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Debug\AsyncClientLib.pdb
 C:\Users\demented\Desktop\C#Programs\AsyncClientLib\obj\Debug\AsyncClientLib.csproj.AssemblyReference.cache
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncClientLib\bin\Debug\AsyncClientLib.dll
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncClientLib\bin\Debug\AsyncClientLib.pdb
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncClientLib\obj\Debug\AsyncClientLib.csproj.AssemblyReference.cache
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncClientLib\obj\Debug\AsyncClientLib.csproj.CoreCompileInputs.cache
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncClientLib\obj\Debug\AsyncClientLib.dll
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncClientLib\obj\Debug\AsyncClientLib.pdb

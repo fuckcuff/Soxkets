@@ -10,3 +10,9 @@ C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncS
 C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.csproj.CoreCompileInputs.cache
 C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.dll
 C:\Users\demented\Desktop\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.pdb
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncServerLib\bin\Debug\AsyncServerLib.dll
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncServerLib\bin\Debug\AsyncServerLib.pdb
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.csproj.AssemblyReference.cache
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.csproj.CoreCompileInputs.cache
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.dll
+D:\MAIN\CUFF\C#Programs\Soxkets\lib\AsyncServerLib\obj\Debug\AsyncServerLib.pdb
