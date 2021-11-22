@@ -3,7 +3,7 @@
 Soxkets is a peer to peer communications windows app
 
 # Download
-[Latest version](https://github.com/fuckcuff/Soxkets/releases/download/1.0.0/Soxkets.rar)
+[Latest version](https://github.com/fuckcuff/Soxkets/releases/download/0.1/Release.rar)
 
 # Preview
 ![Soxkets_EgkQNX9cs8](https://user-images.githubusercontent.com/67871539/128376766-5c790d21-0120-4202-9028-cfc70ee731fc.png)
