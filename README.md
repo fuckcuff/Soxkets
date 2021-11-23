@@ -2,6 +2,8 @@
  
 Soxkets is a peer to peer communications windows app
 
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
+
 # Download
 [Latest version](https://github.com/fuckcuff/Soxkets/releases/download/0.1/Release.rar)
 
